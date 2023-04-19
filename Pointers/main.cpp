@@ -39,12 +39,17 @@ void main()
 
 	const int n = 5;
 	int arr[n] = { 2,4,6,8,10 };
-
+	std::cout << "Method 1: " << std::endl;
 	for (int i = 0; i < n; i++)
 	{
-		std::cout << *(arr + i) << std::endl;
+		std::cout << *(arr + i) << "\t";
 	}
-
-
+	std::cout << std::endl;
+	std::cout << "Method 2: " << std::endl;
+	for (int* p_arr = arr; *p_arr != 0xCCCCCCCC; p_arr++)
+	{
+		std::cout << *p_arr << "\t";
+	}
+	std::cout << std::endl;
 
 }
