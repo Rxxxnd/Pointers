@@ -16,7 +16,6 @@ void main()
 	std::cout << a << "\t" << b << std::endl;
 	std::cout << &a << "\t" << &b << std::endl;
 }
-
 /*
 	-------------------
 	1. by value;
