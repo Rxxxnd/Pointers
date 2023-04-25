@@ -1,7 +1,7 @@
 //TransferParametrs
 #include <iostream>
 
-void Exchange(int a, int b);
+void Exchange(int& a, int& b);
 #define delimiter "\n-------------------------------------------\n"
 
 void main()
@@ -24,7 +24,7 @@ void main()
 	-------------------
 */
 
-void Exchange(int a, int b)
+void Exchange(int& a, int& b)
 {
 	std::cout << &a << "\t" << &b << std::endl;
 	int buffer = a;
