@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 
 void FillRand(int arr[], const int n);
 
@@ -62,12 +62,12 @@ void main()
 
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
-	//1) удаляем строки:
+	//1) СѓРґР°Р»СЏРµРј СЃС‚СЂРѕРєРё:
 	for (int i = 0; i < rows; i++)
 	{
 		delete[] arr[i];
 	}
-	//2) удаляем массив указателей:
+	//2) СѓРґР°Р»СЏРµРј РјР°СЃСЃРёРІ СѓРєР°Р·Р°С‚РµР»РµР№:
 	delete[]arr;
 
 }
