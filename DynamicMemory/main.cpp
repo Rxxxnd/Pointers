@@ -87,12 +87,12 @@ void main()
 	Print(arr, rows, cols);
 	
 	std::cout << delimiter << std::endl;
-	std::cout << "Deleting row: " << std::endl;
+	std::cout << "Deleting row (popback): " << std::endl;
 	arr = pop_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
 
 	std::cout << delimiter << std::endl;
-	std::cout << "Deleting row: " << std::endl;
+	std::cout << "Deleting row (popfront): " << std::endl;
 	arr = pop_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 
