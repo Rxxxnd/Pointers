@@ -34,7 +34,7 @@ template <typename T> void pop_col_back(T** arr, const int rows, int& cols);
 #define DYNAMIC_MEMORY_2
 #define delimiter "\n--------------------------\n"
 
-typedef char DataType;
+typedef int DataType;
 
 void main()
 {
@@ -120,7 +120,7 @@ void main()
 #endif //DYNAMIC_MEMORY_2
 
 }
-//=========================================================================
+//========================================================================================
 void FillRand(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
@@ -369,7 +369,7 @@ template <typename T> void push_col_back(T** arr, const int rows, int& cols)
 	delete[]arr;
 	return buffer;
 }
-template <typename T> T** pop_row_front(T** arr, int& rows, const int cols)
+ template <typename T> T** pop_row_front(T** arr, int& rows, const int cols)
 {
 	T** buffer = new T*[rows - 1];
 	for (int i = 0; i < rows - 1; i++)
