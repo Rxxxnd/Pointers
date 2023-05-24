@@ -355,16 +355,6 @@ template <typename T> void push_col_back(T** arr, const int rows, int& cols)
 	for (int i = 0; i < n; i++) buffer[i] = arr[i];
 	delete[]arr;
 	return buffer;
-
-	/*T* buffer = new int[n - 1];
-	for (int i = 0; i < n - 1; i++);
-	{
-		buffer[i] = arr[i];
-	}
-	delete[] arr;
-	arr = buffer;
-	n--;
-	return arr;*/
 }
   template <typename T> T* pop_front(T* arr, int& n)
 {
