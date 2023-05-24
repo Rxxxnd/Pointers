@@ -8,6 +8,7 @@ void FillRand(int arr[], const int n, int minRand, int maxRand);
 void FillRand(char arr[], const int n, int minRand, int maxRand);
 void FillRand(int** arr, const int rows, const int cols);
 void FillRand(double** arr, const int rows, const int cols);
+void FillRand(char** arr, const int rows, const int cols);
   template <typename T>T** Allocate(const int rows, const int cols);
 template <typename T> void Print(T arr[], const int n);
 template <typename T> void Print(T** arr, const int rows, const int cols);
@@ -24,7 +25,7 @@ template <typename T> void push_col_front(T** arr, const int rows, int& cols);
   template <typename T> T* pop_back(T* arr, int& n);
   template <typename T> T* pop_front(T* arr, int& n);
  template <typename T> T** pop_row_back(T** arr, int& rows, const int cols);
-template <typename T> void pop_row_front(T** arr, int& rows, const int cols);
+template <typename T> T** pop_row_front(T** arr, int& rows, const int cols);
 template <typename T> void pop_col_back(T** arr, const int rows, int& cols);
 
 //=========================================================================
@@ -86,8 +87,13 @@ void main()
 	Print(arr, rows, cols);
 	
 	std::cout << delimiter << std::endl;
-	std::cout << "Deleting last row: " << std::endl;
+	std::cout << "Deleting row: " << std::endl;
 	arr = pop_row_back(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	std::cout << delimiter << std::endl;
+	std::cout << "Deleting row: " << std::endl;
+	arr = pop_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 
 	std::cout << delimiter << std::endl;
@@ -349,13 +355,6 @@ template <typename T> void push_col_back(T** arr, const int rows, int& cols)
 	return arr; //7. returning new array;
 
 }
-  template <typename T> T* pop_back(T* arr, int& n)
-{
-	T* buffer = new T[--n];
-	for (int i = 0; i < n; i++) buffer[i] = arr[i];
-	delete[]arr;
-	return buffer;
-}
   template <typename T> T* pop_front(T* arr, int& n)
 {
 	T* buffer = new T[--n];
@@ -363,9 +362,16 @@ template <typename T> void push_col_back(T** arr, const int rows, int& cols)
 	delete[] arr;
 	return buffer;
 }
-template <typename T> void pop_row_front(T** arr, int& rows, const int cols)
+  template <typename T> T* pop_back(T* arr, int& n)
 {
-	T** buffer = new T * (rows - 1);
+	T* buffer = new T[--n];
+	for (int i = 0; i < n; i++) buffer[i] = arr[i];
+	delete[]arr;
+	return buffer;
+}
+template <typename T> T** pop_row_front(T** arr, int& rows, const int cols)
+{
+	T** buffer = new T*[rows - 1];
 	for (int i = 0; i < rows - 1; i++)
 	{
 		buffer[i] = arr[i];
@@ -374,6 +380,17 @@ template <typename T> void pop_row_front(T** arr, int& rows, const int cols)
 	arr = buffer;
 	rows--;
 	return arr;
+}
+ template <typename T> T** pop_row_back(T** arr, int& rows, const int cols)
+{
+	delete[] arr[rows - 1]; //1. deleting row;
+	T** buffer = new T*[--rows]; //2. creating buffer array;
+	for (int i = 0; i < rows; i++) //3. copy adress to a new array;
+	{
+		buffer[i] = arr[i];
+	}
+	delete[] arr; //4. deleting og array;
+	return buffer;
 }
 template <typename T> void pop_col_back(T** arr, const int rows, int& cols)
 {
@@ -388,15 +405,4 @@ template <typename T> void pop_col_back(T** arr, const int rows, int& cols)
 			arr[i] = buffer;
 		}
 	}
-}
- template <typename T> T** pop_row_back(T** arr, int& rows, const int cols)
-{
-	delete[] arr[rows - 1]; //1. deleting row;
-	T** buffer = new T*[--rows]; //2. creating buffer array;
-	for (int i = 0; i < rows; i++) //3. copy adress to a new array;
-	{
-		buffer[i] = arr[i];
-	}
-	delete[] arr; //4. deleting og array;
-	return buffer;
 }
