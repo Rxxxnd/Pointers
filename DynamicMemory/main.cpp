@@ -97,12 +97,20 @@ void main()
 	Print(arr, rows, cols);
 
 	std::cout << delimiter << std::endl;
+	std::cout << "Push row" << std::endl;
 	arr = push_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 
 	std::cout << delimiter << std::endl;
 	push_col_back(arr, rows, cols);
 	Print(arr, rows, cols);
+	std::cout << delimiter << std::endl;
+	
+	int index;
+	std::cout << "Enter index of added row: "; std::cin >> index;
+	arr = insertRow(arr, rows, cols, index);
+	Print(arr, rows, cols);
+
 
 	std::cout << delimiter << std::endl;
 	std::cout << "Pointer arythmetic: " << std::endl;
@@ -114,7 +122,11 @@ void main()
 		}
 		std::cout << std::endl;
 	}
+
 	std::cout << delimiter << std::endl;
+	std::cout << "Push back: " << std::endl;
+	arr = push_row_back(arr, rows, cols);
+	Print(arr, rows, cols);
 
 	Clear(arr, rows);
 #endif //DYNAMIC_MEMORY_2
@@ -251,16 +263,8 @@ template <typename T> void Print(T** arr, const int rows, const int cols)
 }
  template <typename T> T** insertRow(T** arr, int& rows, const int cols, int const index)
 {
-	T** buffer = new T * [rows + 1];
-	for (int i = 0; i < rows; i++)
-	{
-		i >= index ? buffer[i + 1] = arr[i] : buffer[i] = arr[i];
-	}
-	delete[] arr;
-	arr = buffer;
-	arr[index] = new T[cols]{};
-	rows++;
-	return arr;
+	 return insert(arr, rows, new T[cols]{}, index);
+
 } //
  template <typename T> T** EraseRow(T** arr, int& rows, const int cols, int const index)
 {
@@ -290,7 +294,7 @@ template <typename T> void Print(T** arr, const int rows, const int cols)
   template <typename T> T* push_back(T* arr, int& n, T value)
 {
 	T* buffer = new T[n + 1];
-	for(int i = 0; i < n; i++)
+	for(int i = 0; i < n; i++) 
 	{
 		buffer[i] = arr[i];
 	}
@@ -318,42 +322,31 @@ template <typename T> void push_col_back(T** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
-		T* buffer = new T[cols + 1] {}; //1. createting buffer row;
-		for (int j = 0; j < cols; j++) //2. copy all in og array to the buffer;
-		{
-			buffer[j] = arr[i][j];
-		}
-		delete[] arr[i]; //3. delete og row;
-		arr[i] = buffer; //4. writing new adress of ne row in array;
+		arr[i]=push_back(arr[i], cols, T());
+		cols--;
 	}
 	cols++;
 }
  template <typename T> T** push_row_front(T** arr, int& rows, const int cols)
 {
-	T** buffer = new T* [rows + 1];
-	for (int i = 0; i < rows; i++)
-	{
-		buffer[i + 1] = arr[i];
-	}
-	delete[] arr;
-	arr = buffer;
-	arr[0] = new T [cols] {};
-	rows++;
-	return arr;
+	 return push_front(arr, rows, new T[cols]{});
+
+	
 }
  template <typename T> T** push_row_back(T** arr, int& rows, const int cols)
 {
-	T** buffer = new T* [rows + 1]; //1. create buffer array;
-	for (int i = 0; i < rows; i++) //2. copy rows adress;
-	{
-		buffer[i] = arr[i];
-	}
-	delete[]arr;  //3. delete og array
-	arr = buffer;     //4. swap the adress in 'arr' pointer to a new array adress;
-	arr[rows] = new T[cols] {};    //5. create a new row;
-	rows++; //6. adding new row;
-	return arr; //7. returning new array;
+	 return push_back(arr, rows, new T[cols]{});
 
+	//T** buffer = new T* [rows + 1]; //1. create buffer array;
+	//for (int i = 0; i < rows; i++) //2. copy rows adress;
+	//{
+	//	buffer[i] = arr[i];  
+	//}
+	//delete[]arr;  //3. delete og array
+	//arr = buffer;     //4. swap the adress in 'arr' pointer to a new array adress;
+	//arr[rows] = new T[cols] {};    //5. create a new row;
+	//rows++; //6. adding new row;
+	//return arr; //7. returning new array;
 }
   template <typename T> T* pop_front(T* arr, int& n)
 {
@@ -384,6 +377,7 @@ template <typename T> void push_col_back(T** arr, const int rows, int& cols)
  template <typename T> T** pop_row_back(T** arr, int& rows, const int cols)
 {
 	delete[] arr[rows - 1]; //1. deleting row;
+	 return pop_back(arr, rows);
 	T** buffer = new T*[--rows]; //2. creating buffer array;
 	for (int i = 0; i < rows; i++) //3. copy adress to a new array;
 	{
@@ -394,15 +388,10 @@ template <typename T> void push_col_back(T** arr, const int rows, int& cols)
 }
 template <typename T> void pop_col_back(T** arr, const int rows, int& cols)
 {
-	cols--;
 	for (int i = 0; i < rows; i++)
 	{
-		T* buffer = new T[cols]{};
-		for (int j = 0; j < cols; j++)
-		{
-			buffer[j] = arr[i][j];
-			delete[] arr[i];
-			arr[i] = buffer;
-		}
+		arr[i] = pop_back(arr[i], cols);
+		cols++;
 	}
+	cols--;
 }
