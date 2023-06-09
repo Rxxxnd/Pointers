@@ -330,7 +330,6 @@ template <typename T> void push_col_back(T** arr, const int rows, int& cols)
 {
 	 return push_front(arr, rows, new T[cols]{});
 
-	
 }
  template <typename T> T** push_row_back(T** arr, int& rows, const int cols)
 {
