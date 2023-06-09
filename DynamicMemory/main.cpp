@@ -82,7 +82,7 @@ void main()
 	Print(arr, rows, cols);
 
 	std::cout << delimiter << std::endl;
-	std::cout << "Deleting first row: " << std::endl;
+	std::cout << "Deleting first row (push row back): " << std::endl;
 	arr = push_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
 	
@@ -97,7 +97,7 @@ void main()
 	Print(arr, rows, cols);
 
 	std::cout << delimiter << std::endl;
-	std::cout << "Push row" << std::endl;
+	std::cout << "Push row front: " << std::endl;
 	arr = push_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 
@@ -124,7 +124,7 @@ void main()
 	}
 
 	std::cout << delimiter << std::endl;
-	std::cout << "Push back: " << std::endl;
+	std::cout << "Push row back: " << std::endl;
 	arr = push_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
 
@@ -264,8 +264,7 @@ template <typename T> void Print(T** arr, const int rows, const int cols)
  template <typename T> T** insertRow(T** arr, int& rows, const int cols, int const index)
 {
 	 return insert(arr, rows, new T[cols]{}, index);
-
-} //
+} 
  template <typename T> T** EraseRow(T** arr, int& rows, const int cols, int const index)
 {
 	T** buffer = new T * [rows - 1];
@@ -336,17 +335,6 @@ template <typename T> void push_col_back(T** arr, const int rows, int& cols)
  template <typename T> T** push_row_back(T** arr, int& rows, const int cols)
 {
 	 return push_back(arr, rows, new T[cols]{});
-
-	//T** buffer = new T* [rows + 1]; //1. create buffer array;
-	//for (int i = 0; i < rows; i++) //2. copy rows adress;
-	//{
-	//	buffer[i] = arr[i];  
-	//}
-	//delete[]arr;  //3. delete og array
-	//arr = buffer;     //4. swap the adress in 'arr' pointer to a new array adress;
-	//arr[rows] = new T[cols] {};    //5. create a new row;
-	//rows++; //6. adding new row;
-	//return arr; //7. returning new array;
 }
   template <typename T> T* pop_front(T* arr, int& n)
 {
